@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as ParceirosRouteImport } from './routes/parceiros'
+import { Route as OfertasIndexRouteImport } from './routes/ofertas.index'
+import { Route as OfertasIdRouteImport } from './routes/ofertas.$id'
+import { Route as ReservaIdentificadorRouteImport } from './routes/reserva.$identificador'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParceirosRoute = ParceirosRouteImport.update({
+  id: '/parceiros',
+  path: '/parceiros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OfertasIndexRoute = OfertasIndexRouteImport.update({
+  id: '/ofertas/',
+  path: '/ofertas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OfertasIdRoute = OfertasIdRouteImport.update({
+  id: '/ofertas/$id',
+  path: '/ofertas/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReservaIdentificadorRoute = ReservaIdentificadorRouteImport.update({
+  id: '/reserva/$identificador',
+  path: '/reserva/$identificador',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/parceiros': typeof ParceirosRoute
+  '/ofertas/$id': typeof OfertasIdRoute
+  '/reserva/$identificador': typeof ReservaIdentificadorRoute
+  '/ofertas/': typeof OfertasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/parceiros': typeof ParceirosRoute
+  '/ofertas/$id': typeof OfertasIdRoute
+  '/reserva/$identificador': typeof ReservaIdentificadorRoute
+  '/ofertas': typeof OfertasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/parceiros': typeof ParceirosRoute
+  '/ofertas/$id': typeof OfertasIdRoute
+  '/reserva/$identificador': typeof ReservaIdentificadorRoute
+  '/ofertas/': typeof OfertasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/parceiros'
+    | '/ofertas/$id'
+    | '/reserva/$identificador'
+    | '/ofertas/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/login'
+    | '/parceiros'
+    | '/ofertas/$id'
+    | '/reserva/$identificador'
+    | '/ofertas'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/parceiros'
+    | '/ofertas/$id'
+    | '/reserva/$identificador'
+    | '/ofertas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LoginRoute: typeof LoginRoute
+  ParceirosRoute: typeof ParceirosRoute
+  OfertasIdRoute: typeof OfertasIdRoute
+  ReservaIdentificadorRoute: typeof ReservaIdentificadorRoute
+  OfertasIndexRoute: typeof OfertasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parceiros': {
+      id: '/parceiros'
+      path: '/parceiros'
+      fullPath: '/parceiros'
+      preLoaderRoute: typeof ParceirosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ofertas/': {
+      id: '/ofertas/'
+      path: '/ofertas'
+      fullPath: '/ofertas/'
+      preLoaderRoute: typeof OfertasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ofertas/$id': {
+      id: '/ofertas/$id'
+      path: '/ofertas/$id'
+      fullPath: '/ofertas/$id'
+      preLoaderRoute: typeof OfertasIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reserva/$identificador': {
+      id: '/reserva/$identificador'
+      path: '/reserva/$identificador'
+      fullPath: '/reserva/$identificador'
+      preLoaderRoute: typeof ReservaIdentificadorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LoginRoute: LoginRoute,
+  ParceirosRoute: ParceirosRoute,
+  OfertasIdRoute: OfertasIdRoute,
+  ReservaIdentificadorRoute: ReservaIdentificadorRoute,
+  OfertasIndexRoute: OfertasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
