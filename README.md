@@ -199,7 +199,19 @@ A marca utiliza uma linguagem acolhedora, simples e otimista.
 
 **Código-fonte:** https://github.com/nunesagabi/dio-tem-de-hoje-mvp
 
-As capturas de tela da landing page, catálogo, reserva e painel administrativo serão incluídas como evidências da aplicação.
+## Demonstração da aplicação
+
+### Landing page
+![Landing page do Tem de Hoje](screenshots/landing-page.png)
+
+### Catálogo de ofertas
+![Catálogo de kits](screenshots/catalogo.png)
+
+### Reserva
+![Confirmação de reserva](screenshots/reserva.png)
+
+### Painel administrativo
+![Painel administrativo](screenshots/painel-admin.png)
 
 ## 14. Próximos passos
 
