@@ -10,15 +10,27 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ParceirosRouteImport } from './routes/parceiros'
+import { Route as AuthenticatedParceiroRouteImport } from './routes/_authenticated/parceiro'
 import { Route as OfertasIndexRouteImport } from './routes/ofertas.index'
 import { Route as OfertasIdRouteImport } from './routes/ofertas.$id'
 import { Route as ReservaIdentificadorRouteImport } from './routes/reserva.$identificador'
+import { Route as AuthenticatedParceiroConfiguracoesRouteImport } from './routes/_authenticated/parceiro.configuracoes'
+import { Route as AuthenticatedParceiroDashboardRouteImport } from './routes/_authenticated/parceiro.dashboard'
+import { Route as AuthenticatedParceiroReservasRouteImport } from './routes/_authenticated/parceiro.reservas'
+import { Route as AuthenticatedParceiroKitsIndexRouteImport } from './routes/_authenticated/parceiro.kits.index'
+import { Route as AuthenticatedParceiroKitsIdRouteImport } from './routes/_authenticated/parceiro.kits.$id'
+import { Route as AuthenticatedParceiroKitsNovoRouteImport } from './routes/_authenticated/parceiro.kits.novo'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -30,6 +42,11 @@ const ParceirosRoute = ParceirosRouteImport.update({
   id: '/parceiros',
   path: '/parceiros',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedParceiroRoute = AuthenticatedParceiroRouteImport.update({
+  id: '/parceiro',
+  path: '/parceiro',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const OfertasIndexRoute = OfertasIndexRouteImport.update({
   id: '/ofertas/',
@@ -46,31 +63,89 @@ const ReservaIdentificadorRoute = ReservaIdentificadorRouteImport.update({
   path: '/reserva/$identificador',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedParceiroConfiguracoesRoute =
+  AuthenticatedParceiroConfiguracoesRouteImport.update({
+    id: '/configuracoes',
+    path: '/configuracoes',
+    getParentRoute: () => AuthenticatedParceiroRoute,
+  } as any)
+const AuthenticatedParceiroDashboardRoute =
+  AuthenticatedParceiroDashboardRouteImport.update({
+    id: '/dashboard',
+    path: '/dashboard',
+    getParentRoute: () => AuthenticatedParceiroRoute,
+  } as any)
+const AuthenticatedParceiroReservasRoute =
+  AuthenticatedParceiroReservasRouteImport.update({
+    id: '/reservas',
+    path: '/reservas',
+    getParentRoute: () => AuthenticatedParceiroRoute,
+  } as any)
+const AuthenticatedParceiroKitsIndexRoute =
+  AuthenticatedParceiroKitsIndexRouteImport.update({
+    id: '/kits/',
+    path: '/kits/',
+    getParentRoute: () => AuthenticatedParceiroRoute,
+  } as any)
+const AuthenticatedParceiroKitsIdRoute =
+  AuthenticatedParceiroKitsIdRouteImport.update({
+    id: '/kits/$id',
+    path: '/kits/$id',
+    getParentRoute: () => AuthenticatedParceiroRoute,
+  } as any)
+const AuthenticatedParceiroKitsNovoRoute =
+  AuthenticatedParceiroKitsNovoRouteImport.update({
+    id: '/kits/novo',
+    path: '/kits/novo',
+    getParentRoute: () => AuthenticatedParceiroRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/parceiros': typeof ParceirosRoute
+  '/parceiro': typeof AuthenticatedParceiroRouteWithChildren
   '/ofertas/$id': typeof OfertasIdRoute
   '/reserva/$identificador': typeof ReservaIdentificadorRoute
   '/ofertas/': typeof OfertasIndexRoute
+  '/parceiro/configuracoes': typeof AuthenticatedParceiroConfiguracoesRoute
+  '/parceiro/dashboard': typeof AuthenticatedParceiroDashboardRoute
+  '/parceiro/reservas': typeof AuthenticatedParceiroReservasRoute
+  '/parceiro/kits/$id': typeof AuthenticatedParceiroKitsIdRoute
+  '/parceiro/kits/novo': typeof AuthenticatedParceiroKitsNovoRoute
+  '/parceiro/kits/': typeof AuthenticatedParceiroKitsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/parceiros': typeof ParceirosRoute
+  '/parceiro': typeof AuthenticatedParceiroRouteWithChildren
   '/ofertas/$id': typeof OfertasIdRoute
   '/reserva/$identificador': typeof ReservaIdentificadorRoute
   '/ofertas': typeof OfertasIndexRoute
+  '/parceiro/configuracoes': typeof AuthenticatedParceiroConfiguracoesRoute
+  '/parceiro/dashboard': typeof AuthenticatedParceiroDashboardRoute
+  '/parceiro/reservas': typeof AuthenticatedParceiroReservasRoute
+  '/parceiro/kits/$id': typeof AuthenticatedParceiroKitsIdRoute
+  '/parceiro/kits/novo': typeof AuthenticatedParceiroKitsNovoRoute
+  '/parceiro/kits': typeof AuthenticatedParceiroKitsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/login': typeof LoginRoute
   '/parceiros': typeof ParceirosRoute
+  '/_authenticated/parceiro': typeof AuthenticatedParceiroRouteWithChildren
   '/ofertas/$id': typeof OfertasIdRoute
   '/reserva/$identificador': typeof ReservaIdentificadorRoute
   '/ofertas/': typeof OfertasIndexRoute
+  '/_authenticated/parceiro/configuracoes': typeof AuthenticatedParceiroConfiguracoesRoute
+  '/_authenticated/parceiro/dashboard': typeof AuthenticatedParceiroDashboardRoute
+  '/_authenticated/parceiro/reservas': typeof AuthenticatedParceiroReservasRoute
+  '/_authenticated/parceiro/kits/$id': typeof AuthenticatedParceiroKitsIdRoute
+  '/_authenticated/parceiro/kits/novo': typeof AuthenticatedParceiroKitsNovoRoute
+  '/_authenticated/parceiro/kits/': typeof AuthenticatedParceiroKitsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -78,29 +153,52 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/parceiros'
+    | '/parceiro'
     | '/ofertas/$id'
     | '/reserva/$identificador'
     | '/ofertas/'
+    | '/parceiro/configuracoes'
+    | '/parceiro/dashboard'
+    | '/parceiro/reservas'
+    | '/parceiro/kits/$id'
+    | '/parceiro/kits/novo'
+    | '/parceiro/kits/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/login'
     | '/parceiros'
+    | '/parceiro'
     | '/ofertas/$id'
     | '/reserva/$identificador'
     | '/ofertas'
+    | '/parceiro/configuracoes'
+    | '/parceiro/dashboard'
+    | '/parceiro/reservas'
+    | '/parceiro/kits/$id'
+    | '/parceiro/kits/novo'
+    | '/parceiro/kits'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/login'
     | '/parceiros'
+    | '/_authenticated/parceiro'
     | '/ofertas/$id'
     | '/reserva/$identificador'
     | '/ofertas/'
+    | '/_authenticated/parceiro/configuracoes'
+    | '/_authenticated/parceiro/dashboard'
+    | '/_authenticated/parceiro/reservas'
+    | '/_authenticated/parceiro/kits/$id'
+    | '/_authenticated/parceiro/kits/novo'
+    | '/_authenticated/parceiro/kits/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   LoginRoute: typeof LoginRoute
   ParceirosRoute: typeof ParceirosRoute
   OfertasIdRoute: typeof OfertasIdRoute
@@ -117,6 +215,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -130,6 +235,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/parceiros'
       preLoaderRoute: typeof ParceirosRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/parceiro': {
+      id: '/_authenticated/parceiro'
+      path: '/parceiro'
+      fullPath: '/parceiro'
+      preLoaderRoute: typeof AuthenticatedParceiroRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/ofertas/': {
       id: '/ofertas/'
@@ -152,11 +264,89 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReservaIdentificadorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/parceiro/configuracoes': {
+      id: '/_authenticated/parceiro/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/parceiro/configuracoes'
+      preLoaderRoute: typeof AuthenticatedParceiroConfiguracoesRouteImport
+      parentRoute: typeof AuthenticatedParceiroRoute
+    }
+    '/_authenticated/parceiro/dashboard': {
+      id: '/_authenticated/parceiro/dashboard'
+      path: '/dashboard'
+      fullPath: '/parceiro/dashboard'
+      preLoaderRoute: typeof AuthenticatedParceiroDashboardRouteImport
+      parentRoute: typeof AuthenticatedParceiroRoute
+    }
+    '/_authenticated/parceiro/reservas': {
+      id: '/_authenticated/parceiro/reservas'
+      path: '/reservas'
+      fullPath: '/parceiro/reservas'
+      preLoaderRoute: typeof AuthenticatedParceiroReservasRouteImport
+      parentRoute: typeof AuthenticatedParceiroRoute
+    }
+    '/_authenticated/parceiro/kits/': {
+      id: '/_authenticated/parceiro/kits/'
+      path: '/kits'
+      fullPath: '/parceiro/kits/'
+      preLoaderRoute: typeof AuthenticatedParceiroKitsIndexRouteImport
+      parentRoute: typeof AuthenticatedParceiroRoute
+    }
+    '/_authenticated/parceiro/kits/$id': {
+      id: '/_authenticated/parceiro/kits/$id'
+      path: '/kits/$id'
+      fullPath: '/parceiro/kits/$id'
+      preLoaderRoute: typeof AuthenticatedParceiroKitsIdRouteImport
+      parentRoute: typeof AuthenticatedParceiroRoute
+    }
+    '/_authenticated/parceiro/kits/novo': {
+      id: '/_authenticated/parceiro/kits/novo'
+      path: '/kits/novo'
+      fullPath: '/parceiro/kits/novo'
+      preLoaderRoute: typeof AuthenticatedParceiroKitsNovoRouteImport
+      parentRoute: typeof AuthenticatedParceiroRoute
+    }
   }
 }
 
+interface AuthenticatedParceiroRouteChildren {
+  AuthenticatedParceiroConfiguracoesRoute: typeof AuthenticatedParceiroConfiguracoesRoute
+  AuthenticatedParceiroDashboardRoute: typeof AuthenticatedParceiroDashboardRoute
+  AuthenticatedParceiroReservasRoute: typeof AuthenticatedParceiroReservasRoute
+  AuthenticatedParceiroKitsIdRoute: typeof AuthenticatedParceiroKitsIdRoute
+  AuthenticatedParceiroKitsNovoRoute: typeof AuthenticatedParceiroKitsNovoRoute
+  AuthenticatedParceiroKitsIndexRoute: typeof AuthenticatedParceiroKitsIndexRoute
+}
+
+const AuthenticatedParceiroRouteChildren: AuthenticatedParceiroRouteChildren = {
+  AuthenticatedParceiroConfiguracoesRoute:
+    AuthenticatedParceiroConfiguracoesRoute,
+  AuthenticatedParceiroDashboardRoute: AuthenticatedParceiroDashboardRoute,
+  AuthenticatedParceiroReservasRoute: AuthenticatedParceiroReservasRoute,
+  AuthenticatedParceiroKitsIdRoute: AuthenticatedParceiroKitsIdRoute,
+  AuthenticatedParceiroKitsNovoRoute: AuthenticatedParceiroKitsNovoRoute,
+  AuthenticatedParceiroKitsIndexRoute: AuthenticatedParceiroKitsIndexRoute,
+}
+
+const AuthenticatedParceiroRouteWithChildren =
+  AuthenticatedParceiroRoute._addFileChildren(
+    AuthenticatedParceiroRouteChildren,
+  )
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedParceiroRoute: typeof AuthenticatedParceiroRouteWithChildren
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedParceiroRoute: AuthenticatedParceiroRouteWithChildren,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   LoginRoute: LoginRoute,
   ParceirosRoute: ParceirosRoute,
   OfertasIdRoute: OfertasIdRoute,
