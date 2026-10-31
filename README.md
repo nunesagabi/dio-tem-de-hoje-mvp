@@ -202,16 +202,22 @@ A marca utiliza uma linguagem acolhedora, simples e otimista.
 ## Demonstração da aplicação
 
 ### Landing page
-![Landing page do Tem de Hoje](screenshots/landing-page.png)
+<img width="1892" height="821" alt="image" src="https://github.com/user-attachments/assets/97c1232e-cbb2-4490-9a79-0594058c31e6" />
+
 
 ### Catálogo de ofertas
-![Catálogo de kits](screenshots/catalogo.png)
+<img width="1917" height="822" alt="image" src="https://github.com/user-attachments/assets/1d7c2907-7983-48d4-bde0-89e6a7317b0b" />
+
 
 ### Reserva
-![Confirmação de reserva](screenshots/reserva.png)
+<img width="1902" height="825" alt="image" src="https://github.com/user-attachments/assets/cf806196-6fde-4773-983a-d882917e35a2" />
+<img width="1917" height="825" alt="image" src="https://github.com/user-attachments/assets/73e8f78f-864f-49fa-911d-98ce164c59c2" />
+
+
 
 ### Painel administrativo
-![Painel administrativo](screenshots/painel-admin.png)
+<img width="1912" height="827" alt="image" src="https://github.com/user-attachments/assets/546885e5-b50a-4b57-8569-571b639caf14" />
+
 
 ## 14. Próximos passos
 
